@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
 
     //캐릭터 이동 속도 증가 값
     public float moveChageSpd = 0.1f;
-    
-    //현재 캐릭터 이동 백터 값 
+
+    //???? ĳ???? ??? ???? ?? 
     private Vector3 vecNowVelocity = Vector3.zero;
 
     //현재 캐릭터 이동 방향 벡터 
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public float spd = 0;
     public float horizontal;
 
+    public bool isAtk = false;
 
     public Camera mainCam;
 
@@ -57,19 +58,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //캐릭터 이동 
-       Move();
+        //ĳ???? ??? 
+        Move();
         // Debug.Log(getNowVelocityVal());
         //캐릭터 방향 변경 
         vecDirectionChangeBody();
 
-        animator.SetBool("forntBack_walk", false);
-        spd += Input.GetAxis("Vertical") * Time.deltaTime;
+        // animator.SetBool("forntBack_walk", false);
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(PlayerAtk());
+        }
+
+        float v = Input.GetAxis("Vertical");
+
+        if (v > 0)
+        {
+            spd += Input.GetAxis("Vertical") * Time.deltaTime;
+        }
+        else
+        {
+            spd = 0;
+        }
         animator.SetFloat("spd", spd);
-
- 
-
     }
 
     /// <summary>
@@ -78,11 +90,11 @@ public class Player : MonoBehaviour
     void Move()
     {
         Transform CameraTransform = mainCam.transform;
-        
-        //메인 카메라가 바라보는 방향이 월드상에 어떤 방향인가.
+
+        //???? ???? ???? ?????? ????? ?? ???????.
         Vector3 forward = CameraTransform.TransformDirection(Vector3.forward);
         forward.y = 0.0f;
-       
+
         //forward.z, forward.x
         Vector3 right = new Vector3(forward.z, 0.0f, -forward.x);
 
@@ -93,20 +105,20 @@ public class Player : MonoBehaviour
         //케릭터가 이동하고자 하는 방향 
         Vector3 targetDirection = horizontal * right + vertical * forward;
 
-        
 
-        //현재 이동하는 방향에서 원하는 방향으로 회전 
+
+        //???? ?????? ?????? ????? ???????? ??? 
 
         vecMoveDirection = Vector3.RotateTowards(vecMoveDirection, targetDirection, rotateMoveSpd * Mathf.Deg2Rad * Time.deltaTime, 1000.0f);
         vecMoveDirection = vecMoveDirection.normalized;
         //캐릭터 이동 속도
         float spd = walkMoveSpd;
-         
-       // 프레임 이동 양
-       Vector3 moveAmount = (vecMoveDirection * spd * Time.deltaTime);
 
-       collisionFlagsCharacter = controllerCharacter.Move(moveAmount);
-       
+        // ?????? ??? ??
+        Vector3 moveAmount = (vecMoveDirection * spd * Time.deltaTime);
+
+        collisionFlagsCharacter = controllerCharacter.Move(moveAmount);
+
     }
 
 
@@ -176,15 +188,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    void PlayerAtk()
+    IEnumerator PlayerAtk()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-        }
-
+        isAtk = true;
+        animator.SetTrigger("Attack");
         RunAtk = Atk * 3;
         JumAtk = RunAtk * Atk * 2;
+        yield return new WaitForSeconds(1.5f);
+        isAtk = false;
     }
-
 }
