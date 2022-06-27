@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     Animator animator = null;
 
+    public float jump = 5f;
 
     public float Atk = 10f;
 
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(PlayerAtk());
         }
-
+    
         float v = Input.GetAxis("Vertical");
 
         if (v > 0)
@@ -151,25 +152,25 @@ public class Player : MonoBehaviour
     /// <summary>
 	/// GUI SKin
 	/// </summary>
-    private void OnGUI()
-    {
-        if (controllerCharacter != null && controllerCharacter.velocity != Vector3.zero)
-        {
-            var labelStyle = new GUIStyle();
-            labelStyle.fontSize = 50;
-            labelStyle.normal.textColor = Color.white;
-            //캐릭터 현재 속도
-            float _getVelocitySpd = getNowVelocityVal();
-            GUILayout.Label("현재속도 : " + _getVelocitySpd.ToString(), labelStyle);
+    //private void OnGUI()
+    //{
+    //    if (controllerCharacter != null && controllerCharacter.velocity != Vector3.zero)
+    //    {
+    //        var labelStyle = new GUIStyle();
+    //        labelStyle.fontSize = 25;
+    //        labelStyle.normal.textColor = Color.white;
+    //        //캐릭터 현재 속도
+    //        float _getVelocitySpd = getNowVelocityVal();
+    //        GUILayout.Label("현재속도 : " + _getVelocitySpd.ToString(), labelStyle);
 
-            //현재 캐릭터 방향 + 크기
-            GUILayout.Label("현재벡터 : " + controllerCharacter.velocity.ToString(), labelStyle);
+    //        //현재 캐릭터 방향 + 크기
+    //        GUILayout.Label("현재벡터 : " + controllerCharacter.velocity.ToString(), labelStyle);
 
-            //현재  재백터 크기 속도
-            GUILayout.Label("현재백터 크기 속도 : " + vecNowVelocity.magnitude.ToString(), labelStyle);
+    //        //현재  재백터 크기 속도
+    //        GUILayout.Label("현재백터 크기 속도 : " + vecNowVelocity.magnitude.ToString(), labelStyle);
 
-        }
-    }
+    //    }
+    //}
     /// <summary>
     /// 캐릭터 몸통 벡터 방향 함수
     /// </summary>
@@ -197,4 +198,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         isAtk = false;
     }
+
 }
