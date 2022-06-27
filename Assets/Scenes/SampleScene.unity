@@ -5464,6 +5464,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1195049989 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 582480816384568578, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+  m_PrefabInstance: {fileID: 2016322319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1479211312
 GameObject:
   m_ObjectHideFlags: 0
@@ -5651,6 +5656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd741956a3304a4689eb83eab9eeb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 1195049989}
   type: 4
   value: 0
 --- !u!135 &1680055371
@@ -5819,7 +5825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2465553
+      value: -3.07
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_LocalPosition.y
