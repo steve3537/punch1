@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Transform parent;
+    public Transform _parent;
     public enum Type { Ammo, Coin, Gernade, Heart, Weapon };
     public Type type;
     public int value;
@@ -15,8 +15,9 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.SetParent(parent);
-            other.transform.localPosition = Vector3.zero;
+            Debug.Log(_parent);
+            other.transform.SetParent(_parent);
+            other.transform.localPosition = new Vector3(0,0,0);
             Debug.Log("ÇØ¸Ó");
         }
     }

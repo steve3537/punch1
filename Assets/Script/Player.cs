@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    GameObject effect;
     Animator animator = null;
+
+    public Transform fistpose;
 
     public float jump = 5f;
 
@@ -192,10 +196,13 @@ public class Player : MonoBehaviour
     IEnumerator PlayerAtk()
     {
         isAtk = true;
+        GameObject Effect = Instantiate(effect, fistpose);
+        Effect.transform.localPosition = new Vector3(0, 0, 0);
         animator.SetTrigger("Attack");
         RunAtk = Atk * 3;
         JumAtk = RunAtk * Atk * 2;
         yield return new WaitForSeconds(1.5f);
+        Destroy(Effect, 1);
         isAtk = false;
     }
 
